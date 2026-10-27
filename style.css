@@ -1,0 +1,15 @@
+body { font-family: Arial, sans-serif; background: #f4f4f9; padding: 20px; display: flex; justify-content: center; }
+.container { background: white; padding: 20px; border-radius: 8px; width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+h1 { text-align: center; }
+.input-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+input { padding: 8px; font-size: 14px; }
+button { padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+button:hover { background-color: #0056b3; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+th { background: #f2f2f2; }
+.result-box { text-align: center; margin-bottom: 10px; }
+
+/* Karen's CSS */
+#clearBtn { background-color: #dc3545; width: 100%; margin-top: 5px; }
+#clearBtn:hover { background-color: #bd2130; }

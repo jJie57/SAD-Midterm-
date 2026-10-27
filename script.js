@@ -1,27 +1,40 @@
-// Added by Karen - Clear All Functionality & Input Validation
-function clearAllData() {
-    subjects = [];
-    const tableBody = document.querySelector("#subjectTable tbody");
-    const gpaResult = document.getElementById("gpaResult");
-    
-    if (tableBody) tableBody.innerHTML = "";
-    if (gpaResult) gpaResult.textContent = "0.00";
-    
-    alert("All data has been cleared.");
+// --- ANTONETONATE'S FEATURE: Add Subject & Compute GPA ---
+document.getElementById('addBtn').addEventListener('click', function() {
+    const name = document.getElementById('subjectName').value;
+    const grade = parseFloat(document.getElementById('subjectGrade').value);
+    const units = parseFloat(document.getElementById('subjectUnits').value);
+
+    if (!name || isNaN(grade) || isNaN(units)) {
+        alert('Punan ang tamang detalye!');
+        return;
+    }
+
+    const tableBody = document.querySelector('#gradeTable tbody');
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = '<td>${name}</td><td>${grade}</td><td>${units}</td>';
+    tableBody.appendChild(newRow);
+
+    calculateGPA();
+});
+
+function calculateGPA() {
+    const rows = document.querySelectorAll('#gradeTable tbody tr');
+    let totalPoints = 0;
+    let totalUnits = 0;
+
+    rows.forEach(row => {
+        const grade = parseFloat(row.cells[1].innerText);
+        const units = parseFloat(row.cells[2].innerText);
+        totalPoints += grade * units;
+        totalUnits += units;
+    });
+
+    const gpa = totalUnits > 0 ? (totalPoints / totalUnits).toFixed(2) : '0.00';
+    document.getElementById('gpaResult').innerText = gpa;
 }
 
-function validateInput(subjectName, grade, units) {
-    if (!subjectName || subjectName.trim() === "") {
-        alert("Please enter a valid subject name.");
-        return false;
-    }
-    if (isNaN(grade) || grade < 1.0 || grade > 5.0) {
-        alert("Grade must be a valid number between 1.0 and 5.0.");
-        return false;
-    }
-    if (isNaN(units) || units <= 0) {
-        alert("Units must be greater than 0.");
-        return false;
-    }
-    return true;
-}
+// --- KAREN'S FEATURE: Clear All Button Logic ---
+document.getElementById('clearBtn')?.addEventListener('click', function() {
+    document.querySelector('#gradeTable tbody').innerHTML = '';
+    document.getElementById('gpaResult').innerText = '0.00';
+});
